@@ -1,0 +1,15 @@
+{
+    "numOfNodes": 5,
+    "numOfEdges": 7,
+    "averageDegree": null,
+    "isDirected": false,
+    "numOfConnectedComponents": 1,
+    "isMultigraph": false,
+    "isTree": false,
+    "hasSelfLoops": false,
+    "weight": {
+        "weightMin": 0,
+        "weightMax": 10,
+        "isDecimal": false
+    },
+}
