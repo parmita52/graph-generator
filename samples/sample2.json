@@ -10,6 +10,6 @@
     "weight": {
         "weightMin": 0,
         "weightMax": 10,
-        "isDecimal": false
+        "isInt": false
     },
 }
