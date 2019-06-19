@@ -7,9 +7,5 @@
     "isMultigraph": false,
     "isTree": false,
     "hasSelfLoops": false,
-    "weight": {
-        "weightMin": 0,
-        "weightMax": 10,
-        "isFloat": false
-    }
+    "isWeighted": false
 }

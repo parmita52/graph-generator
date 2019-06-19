@@ -1,11 +1,10 @@
 {
     "numOfNodes": 5,
     "numOfEdges": 7,
-    "averageDegree": null,
     "isDirected": false,
-    "numOfConnectedComponents": 1,
-    "isMultigraph": false,
-    "isTree": false,
-    "hasSelfLoops": false,
+    // "numOfConnectedComponents": 1,
+    "isMultigraph": true,
+    // "isTree": false,
+    "hasSelfLoops": true,
     "weight": null
 }
