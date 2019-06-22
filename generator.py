@@ -149,7 +149,8 @@ def analyze_graph(G):
     return {
         "edge_list": get_edge_list(G),
         "adjacency_list": get_adjacency_list(G),
-        "adjacency_matrix": get_adjacency_matrix(G)
+        "adjacency_matrix": get_adjacency_matrix(G),
+        "degree_list": get_degree_list(G),
     }
     
 def get_edge_list(G):
@@ -168,6 +169,9 @@ def get_adjacency_list(G):
     
 def get_adjacency_matrix(G):
     return nx.adjacency_matrix(G).toarray()
+
+def get_degree_list(G):
+    return dict(G.degree())
 
 def draw_graph(G):
     labels = nx.get_edge_attributes(G,'weight')
