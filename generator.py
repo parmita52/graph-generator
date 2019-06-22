@@ -18,8 +18,9 @@ NUM_NODES_DEFAULT = 10
 NUM_EDGES_DEFAULT = 10
 
 #########################
-#### Data Structures ####
+#### Data Structure #####
 #########################
+
 class UserInput:
     def __init__(self, numOfNodes, numOfEdges, isDirected, isMultigraph, hasSelfLoops, isWeighted, weightMin=WEIGHT_MIN_DEFAULT, weightMax=WEIGHT_MAX_DEFAULT, weightIsFloat=False):
         self.numOfNodes = numOfNodes
@@ -81,16 +82,6 @@ def remove_self_loops(edgeList):
 def remove_directed_edges(edgeList):
     return list(filter(lambda x : x[0] >= x[1], edgeList))
 
-def draw_graph(G):
-    # print(G.edges)
-    for (a,b) in G.edges:
-        print(a, b, G[a][b]['weight'])
-    labels = nx.get_edge_attributes(G,'weight')
-    nx.draw(G, with_labels=True)
-    pos = nx.drawing.layout.spring_layout(G)
-    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
-    plt.show()
-
 #########################
 ## Generator Functions ##
 #########################
@@ -113,7 +104,6 @@ def generate_graph(userInput):
     if userInput.isWeighted:
         G = add_weights(G, userInput)
      
-    # draw_graph(G)
     return G
 
 def generate_Graph(userInput, allEdges):
@@ -152,6 +142,41 @@ def generate_MultiDiGraph(userInput, allEdges):
     return G
 
 #########################
+## Analysis Functions ###
+#########################
+
+def analyze_graph(G):
+    return {
+        "edge_list": get_edge_list(G),
+        "adjacency_list": get_adjacency_list(G),
+        "adjacency_matrix": get_adjacency_matrix(G)
+    }
+    
+def get_edge_list(G):
+    if not nx.is_directed(G):
+        return sorted(list(G.edges()) + list(map(lambda x: x[::-1], G.edges())))
+    else:
+        return sorted(list(G.edges()))
+
+def get_adjacency_list(G):
+    d = {}
+    for (x, y) in G.edges():
+        d[x] = d.get(x, []) + [y]
+        if not nx.is_directed(G):
+            d[y] = d.get(y, []) + [x]
+    return d
+    
+def get_adjacency_matrix(G):
+    return nx.adjacency_matrix(G).toarray()
+
+def draw_graph(G):
+    labels = nx.get_edge_attributes(G,'weight')
+    nx.draw(G, with_labels=True)
+    pos = nx.drawing.layout.spring_layout(G)
+    nx.draw_networkx_edge_labels(G, pos, edge_labels=labels)
+    plt.show()
+
+#########################
 ##### Main Function #####
 #########################
 
@@ -159,11 +184,12 @@ def main():
     test_sample()
 
 def test_sample():
-    # path = "./samples/sample1.json"
+    path = "./samples/sample1.json"
     # path = "./samples/sample2.json"
-    path = "./samples/sample3.json"
+    # path = "./samples/sample3.json"
     userInput = UserInput.fromPath(path)
-    generate_graph(userInput)
+    G = generate_graph(userInput)
+    print(analyze_graph(G))
 
 if __name__ == "__main__":
     main()
