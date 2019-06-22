@@ -162,7 +162,7 @@ def test_sample():
     # path = "./samples/sample1.json"
     # path = "./samples/sample2.json"
     path = "./samples/sample3.json"
-    userInput = UserInput.fromJSON(path)
+    userInput = UserInput.fromPath(path)
     generate_graph(userInput)
 
 if __name__ == "__main__":
